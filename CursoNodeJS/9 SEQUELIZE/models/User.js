@@ -9,7 +9,7 @@ const User = db.define('User', {
     },
     ocupation: {
         type:DataTypes.STRING,
-        allowNull:false //require é a forma mais correta de definir que o valor nao pode null
+        require: true//require é a forma mais correta de definir que o valor nao pode null
     },
     newsletter: {
         type:DataTypes.BOOLEAN,
