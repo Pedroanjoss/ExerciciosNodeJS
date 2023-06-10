@@ -3,6 +3,10 @@
     {{#each users}}
     <div class="item">
         <p>{{this.name}}</p>
+        <p>{{this.ocupation}}</p>
+        <div class="actions">
+            <a href="/users/{{this.id}}">Ver detalhes</a>
+        </div>
     </div>
     {{/each}}
 </div>
