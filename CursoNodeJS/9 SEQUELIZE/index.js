@@ -58,12 +58,45 @@ app.post('/users/delete/:id', async (req, res) => {
   res.redirect('/')
 })
 
-app.get('/users/edit/:id', async (req, res) => {
+app.get('/users/edit/:id', function (req, res) {
   const id = req.params.id
-  
-  const user = await User.findOne({raw : true, where: { id: id}})
 
-  res.render('useredit', { user } )
+  User.findOne({
+    raw: true,
+    where: {
+      id: id,
+    },
+  })
+    .then((user) => {
+      console.log(user)
+      res.render('useredit', { user })
+    })
+    .catch((err) => console.log(err))
+})
+
+app.post('/users/update',async (req, res) => {
+  const id = req.body.id
+  const name = req.body.name
+  const ocupation = req.body.ocupation
+  let newsletter = req.body.newsletter
+
+  if (newsletter === 'on' ) {
+    newsletter=true
+  } else {
+    newsletter=false
+  }
+
+  const userData ={
+    id,
+    name,
+    ocupation,
+    newsletter
+
+  }
+
+  await User.update(userData, {where : {id:id}})
+
+  res.redirect('/')
 })
 
 app.get('/', async (req, res) => {
@@ -77,7 +110,10 @@ app.get('/', async (req, res) => {
 
 
 
-conn.sync().then( () =>
+conn.sync(
+  /*sync() para limpar o banco 
+  ({force:true})*/
+).then( () =>
  { app.listen(3000)
 })
 .catch((err) => console.log(err))
