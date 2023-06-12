@@ -138,6 +138,19 @@ app.post('/addres/create', async (req, res) => {
 
 })
 
+app.post('/address/delete/', function (req, res) {
+  const id = req.body.id
+
+  Address.destroy({
+    where: {
+      id: id,
+    },
+  })
+    .then(res.redirect('/'))
+    .catch((err) => console.log(err))
+})
+
+
 
 
 conn.sync(
