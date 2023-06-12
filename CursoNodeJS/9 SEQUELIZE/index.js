@@ -63,18 +63,26 @@ app.post('/users/delete/:id', async (req, res) => {
 app.get('/users/edit/:id', function (req, res) {
   const id = req.params.id
 
-  User.findOne({
-    raw: true,
+  const user = User.findOne({
+    include:Address,
     where: {
       id: id,
     },
   })
-    .then((user) => {
-      console.log(user)
-      res.render('useredit', { user })
-    })
-    .catch((err) => console.log(err))
+   
+  try {
+    const user = User.findOne({ include:Address,where: {id: id,}})
+
+      res.render('useredit', {user: user.get({plain: true})} )
+    
+    
+  } catch (error) {
+    console.log(error)
+  }
+
 })
+
+
 
 app.post('/users/update',async (req, res) => {
   const id = req.body.id
