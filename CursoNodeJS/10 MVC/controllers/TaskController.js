@@ -16,7 +16,18 @@ module.exports = class TaskController {
     await Task.create(task)
 
     res.redirect('/tasks')
+
+
 }
+
+  static async removeTask(req, res) {
+
+    const id = req.body.id
+
+    await Task.destroy({where: {id:id}})
+
+    res.redirect('/tasks')
+  }
 
   static async showTasks(req, res) {
 
