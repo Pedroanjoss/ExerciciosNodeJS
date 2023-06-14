@@ -3,9 +3,9 @@
     {{#each tasks}}
     <li>
        {{#if this.done}}
-         <a href="/" class="title done">{{this.title}}</a>
+         <h2  class="title done ">{{this.title}}</h2>
        {{else}} 
-         <a href="/" class="title">{{this.title}}</a>
+         <h2  class="title ">{{this.title}}</h2>
        {{/if}}   
         <div class="actions">
             <form action="/tasks/updatestatus" method="POST">
