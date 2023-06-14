@@ -86,9 +86,15 @@
   font-size: 1.2em;
    }
 
-   .task-list .title:hover{
+  .task-list .title:hover{
    color: #333;
      }
+
+  .title.done{
+     text-decoration: line-through;
+     color: #ccc;
+        }
+   
 
     .actions {
       display: flex;
